@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package task;
+
+service TaskService {
+    rpc AddTodo (AddTodoRequest) returns (AddTodoResponse);
+    rpc GetTodo (GetTodoRequest) returns (GetTodoResponse);
+    rpc DeleteTask (DeleteTaskRequest) returns (DeleteTaskResponse);
+    rpc UpdateTaskStatus (UpdateTaskStatusRequest) returns (UpdateTaskStatusResponse);
+    rpc Halmal (HalmalRequest) returns (HalmalResponse);
+}
+
+message AddTodoRequest {
+    int32 user_id = 1;
+    string task_name = 2;
+    string due_date = 3; // Use string to represent datetime
+    bool status = 4;
+}
+
+message AddTodoResponse {
+    string message = 1;
+}
+
+message GetTodoRequest {
+    int32 user_id = 1; // Optional field
+}
+
+message Task {
+    int32 id = 1;
+    string name = 2;
+    string due_date = 3;
+    int32 assigned_user = 4;
+    bool status = 5;
+}
+
+message GetTodoResponse {
+    repeated Task tasks = 1;
+}
+
+message DeleteTaskRequest {
+    int32 task_id = 1;
+}
+
+message DeleteTaskResponse {
+    string message = 1;
+}
+
+message UpdateTaskStatusRequest {
+    int32 task_id = 1;
+    bool status = 2;
+}
+
+message UpdateTaskStatusResponse {
+    string message = 1;
+}
+
+message HalmalRequest {
+    string type = 1;
+}
+
+message HalmalResponse {
+    string message = 1;
+}
